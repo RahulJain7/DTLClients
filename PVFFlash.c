@@ -16,13 +16,13 @@
 
 void error(const char*);
 
-void PVFFlash(char *Prop,double P,double VF, int Nc,const char *Comp[],const double x[],double Resultss[])
+char* PVFFlash(char *Prop,double P,double VF, int Nc,const char *Comp[],const double x[])
 
 
 { 
- char *ResultStr[Nc];
+   char *Result;
 // double Resultss[3];
-  char *token;
+//  char *token;
   int i = 0;
   int j = 0;
   int k = 0;
@@ -78,15 +78,16 @@ void PVFFlash(char *Prop,double P,double VF, int Nc,const char *Comp[],const dou
        if (recvfrom(sock_d, recvbuffer, BUFFERSIZE, 0, (struct sockaddr*) &sock_addr, &size) == 0)
        perror("The server therminated prematurely");
        
-    char *result1 = recvbuffer;
-       token = strtok(result1, " ");
-       while (token != NULL)
-        {
- 	  ResultStr[k] = token;
-          token = strtok(NULL, " ");
-          Resultss[k] = round(atof(ResultStr[k])*100000)/100000;
-          k++;
+         Result = recvbuffer;
+ //      token = strtok(result1, " ");
+ //      while (token != NULL)
+ //       {
+ //	  ResultStr[k] = token;
+ //         token = strtok(NULL, " ");
+ //         Resultss[k] = round(atof(ResultStr[k])*100000)/100000;
+ //         k++;
           
-        }
+ //       }
  close(sock_d);
+return Result;
 }
